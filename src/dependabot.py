@@ -75,7 +75,7 @@ def write_repo_dependabot_list(dependabot_list):
             ]
         )
         for alert in dependabot_list:
-            if alert["state"] == "none":
+            if alert["state"] == "1":
                 alert["fixed_at"] = "none"
                 alert["dismissed_by"] = "none"
                 alert["dismissed_at"] = "none"

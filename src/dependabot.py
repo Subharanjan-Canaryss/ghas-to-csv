@@ -44,6 +44,7 @@ def list_repo_dependabot_alerts(api_endpoint, github_pat, repo_name):
 
 
 def write_repo_dependabot_list(dependabot_list):
+    print("IN WRITE_REPO_DEPENDABOT_LIST")
     """
     Write the list of dependabot alerts to a CSV file.
 
@@ -53,57 +54,57 @@ def write_repo_dependabot_list(dependabot_list):
     Outputs:
     - CSV file of dependabot alerts
     """
-    with open("dependabot_list.csv", "w") as f:
-        writer = csv.writer(f)
-        writer.writerow(
-            [
-                "number",
-                "state",
-                "created_at",
-                "updated_at",
-                "fixed_at",
-                "dismissed_at",
-                "dismissed_by",
-                "dismissed_reason",
-                "html_url",
-                "dependency_manifest",
-                "dependency_ecosystem",
-                "dependency_name",
-                "severity",
-                "ghsa_id",
-                "cve_id",
-            ]
-        )
-        print(type(writer))
-        for alert in dependabot_list:
-            print(alert);
-            if alert["state"] == "open":
-                alert["fixed_at"] = "none"
-                alert["dismissed_by"] = "none"
-                alert["dismissed_at"] = "none"
-                alert["dismissed_reason"] = "none"
-            if alert["state"] == "dismissed":
-                alert["fixed_at"] = "none"
-            if alert["state"] == "fixed":
-                alert["dismissed_by"] = "none"
-                alert["dismissed_at"] = "none"
-                alert["dismissed_reason"] = "none"
-            writer.writerow(
-                [
-                    alert["number"],
-                    alert["state"],
-                    alert["created_at"],
-                    alert["updated_at"],
-                    alert["fixed_at"],
-                    alert["dismissed_at"],
-                    alert["dismissed_by"],
-                    alert["dismissed_reason"],
-                    alert["html_url"],
-                    alert["dependency"]["manifest_path"],
-                    alert["dependency"]["package"]["ecosystem"],
-                    alert["dependency"]["package"]["name"],
-                    alert["security_vulnerability"]["severity"],
-                    alert["security_advisory"]["ghsa_id"],
-                    alert["security_advisory"]["cve_id"],
-                ]
-            )
+#     with open("dependabot_list.csv", "w") as f:
+#         writer = csv.writer(f)
+#         writer.writerow(
+#             [
+#                 "number",
+#                 "state",
+#                 "created_at",
+#                 "updated_at",
+#                 "fixed_at",
+#                 "dismissed_at",
+#                 "dismissed_by",
+#                 "dismissed_reason",
+#                 "html_url",
+#                 "dependency_manifest",
+#                 "dependency_ecosystem",
+#                 "dependency_name",
+#                 "severity",
+#                 "ghsa_id",
+#                 "cve_id",
+#             ]
+#         )
+#         print(type(writer))
+#         for alert in dependabot_list:
+#             print(alert);
+#             if alert["state"] == "open":
+#                 alert["fixed_at"] = "none"
+#                 alert["dismissed_by"] = "none"
+#                 alert["dismissed_at"] = "none"
+#                 alert["dismissed_reason"] = "none"
+#             if alert["state"] == "dismissed":
+#                 alert["fixed_at"] = "none"
+#             if alert["state"] == "fixed":
+#                 alert["dismissed_by"] = "none"
+#                 alert["dismissed_at"] = "none"
+#                 alert["dismissed_reason"] = "none"
+#             writer.writerow(
+#                 [
+#                     alert["number"],
+#                     alert["state"],
+#                     alert["created_at"],
+#                     alert["updated_at"],
+#                     alert["fixed_at"],
+#                     alert["dismissed_at"],
+#                     alert["dismissed_by"],
+#                     alert["dismissed_reason"],
+#                     alert["html_url"],
+#                     alert["dependency"]["manifest_path"],
+#                     alert["dependency"]["package"]["ecosystem"],
+#                     alert["dependency"]["package"]["name"],
+#                     alert["security_vulnerability"]["severity"],
+#                     alert["security_advisory"]["ghsa_id"],
+#                     alert["security_advisory"]["cve_id"],
+#                 ]
+#             )

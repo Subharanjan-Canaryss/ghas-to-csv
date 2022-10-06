@@ -52,62 +52,63 @@ def write_repo_cs_list(cs_list):
     Outputs:
     - CSV file of code scanning alerts
     """
+    print("write_repo_cs_list")
 
     # Write code scanning alerts to csv file
-    with open("cs_list.csv", "w") as f:
-        writer = csv.writer(f)
-        writer.writerow(
-            [
-                "number",
-                "created_at",
-                "html_url",
-                "state",
-                "fixed_at",
-                "dismissed_by",
-                "dismissed_at",
-                "dismissed_reason",
-                "rule_id",
-                "rule_severity",
-                "rule_tags",
-                "rule_description",
-                "rule_name",
-                "tool_name",
-                "tool_version",
-                "most_recent_instance_ref",
-                "most_recent_instance_state",
-                "most_recent_instance_sha",
-                "instances_url",
-            ]
-        )
-        for cs in cs_list:
-            if cs["state"] == "open":
-                cs["fixed_at"] = "none"
-                cs["dismissed_by"] = "none"
-                cs["dismissed_at"] = "none"
-                cs["dismissed_reason"] = "none"
-            writer.writerow(
-                [
-                    cs["number"],
-                    cs["created_at"],
-                    cs["html_url"],
-                    cs["state"],
-                    cs["fixed_at"],
-                    cs["dismissed_by"],
-                    cs["dismissed_at"],
-                    cs["dismissed_reason"],
-                    cs["rule"]["id"],
-                    cs["rule"]["severity"],
-                    cs["rule"]["tags"],
-                    cs["rule"]["description"],
-                    cs["rule"]["name"],
-                    cs["tool"]["name"],
-                    cs["tool"]["version"],
-                    cs["most_recent_instance"]["ref"],
-                    cs["most_recent_instance"]["state"],
-                    cs["most_recent_instance"]["commit_sha"],
-                    cs["instances_url"],
-                ]
-            )
+#     with open("cs_list.csv", "w") as f:
+#         writer = csv.writer(f)
+#         writer.writerow(
+#             [
+#                 "number",
+#                 "created_at",
+#                 "html_url",
+#                 "state",
+#                 "fixed_at",
+#                 "dismissed_by",
+#                 "dismissed_at",
+#                 "dismissed_reason",
+#                 "rule_id",
+#                 "rule_severity",
+#                 "rule_tags",
+#                 "rule_description",
+#                 "rule_name",
+#                 "tool_name",
+#                 "tool_version",
+#                 "most_recent_instance_ref",
+#                 "most_recent_instance_state",
+#                 "most_recent_instance_sha",
+#                 "instances_url",
+#             ]
+#         )
+#         for cs in cs_list:
+#             if cs["state"] == "open":
+#                 cs["fixed_at"] = "none"
+#                 cs["dismissed_by"] = "none"
+#                 cs["dismissed_at"] = "none"
+#                 cs["dismissed_reason"] = "none"
+#             writer.writerow(
+#                 [
+#                     cs["number"],
+#                     cs["created_at"],
+#                     cs["html_url"],
+#                     cs["state"],
+#                     cs["fixed_at"],
+#                     cs["dismissed_by"],
+#                     cs["dismissed_at"],
+#                     cs["dismissed_reason"],
+#                     cs["rule"]["id"],
+#                     cs["rule"]["severity"],
+#                     cs["rule"]["tags"],
+#                     cs["rule"]["description"],
+#                     cs["rule"]["name"],
+#                     cs["tool"]["name"],
+#                     cs["tool"]["version"],
+#                     cs["most_recent_instance"]["ref"],
+#                     cs["most_recent_instance"]["state"],
+#                     cs["most_recent_instance"]["commit_sha"],
+#                     cs["instances_url"],
+#                 ]
+#             )
 
 
 def list_org_code_scanning_alerts(api_endpoint, github_pat, org_name):

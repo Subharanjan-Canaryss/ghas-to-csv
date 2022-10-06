@@ -376,6 +376,7 @@ def list_enterprise_cloud_code_scanning_alerts(
 
 
 def write_enterprise_cloud_cs_list(cs_list):
+    print("write_enterprise_cloud_cs_list")
     """
     Write a list of code scanning alerts to a csv file.
 
@@ -388,65 +389,65 @@ def write_enterprise_cloud_cs_list(cs_list):
     - CSV file of repositories not accessible or without code scanning enabled
     """
 
-    with open("cs_list.csv", "a") as f:
-        writer = csv.writer(f)
-        writer.writerow(
-            [
-                "repository",
-                "repo_id",
-                "number",
-                "created_at",
-                "html_url",
-                "state",
-                "fixed_at",
-                "dismissed_by",
-                "dismissed_at",
-                "dismissed_reason",
-                "rule_id",
-                "rule_severity",
-                "rule_tags",
-                "rule_description",
-                "rule_name",
-                "tool_name",
-                "tool_version",
-                "most_recent_instance_ref",
-                "most_recent_instance_state",
-                "most_recent_instance_sha",
-                "instances_url",
-            ]
-        )
-        for cs in cs_list:  # loop through each alert in the list
-            if cs["state"] == "open":
-                cs["fixed_at"] = "none"
-                cs["dismissed_by"] = "none"
-                cs["dismissed_at"] = "none"
-                cs["dismissed_reason"] = "none"
-            writer.writerow(
-                [
-                    cs["repository"]["full_name"],
-                    cs["repository"]["id"],
-                    cs["number"],
-                    cs["created_at"],
-                    cs["html_url"],
-                    cs["state"],
-                    cs["fixed_at"],
-                    cs["dismissed_by"],
-                    cs["dismissed_at"],
-                    cs["dismissed_reason"],
-                    cs["rule"]["id"],
-                    cs["rule"]["severity"],
-                    cs["rule"]["tags"],
-                    cs["rule"]["description"],
-                    cs["rule"]["name"],
-                    cs["tool"]["name"],
-                    cs["tool"]["version"],
-                    cs["most_recent_instance"]["ref"],
-                    cs["most_recent_instance"]["state"],
-                    cs["most_recent_instance"]["commit_sha"],
-                    cs["instances_url"],
-                ]
-            )
-        else:
-            with open("excluded_repos.csv", "a") as g:
-                writer = csv.writer(g)
-                writer.writerow([cs])
+#     with open("cs_list.csv", "a") as f:
+#         writer = csv.writer(f)
+#         writer.writerow(
+#             [
+#                 "repository",
+#                 "repo_id",
+#                 "number",
+#                 "created_at",
+#                 "html_url",
+#                 "state",
+#                 "fixed_at",
+#                 "dismissed_by",
+#                 "dismissed_at",
+#                 "dismissed_reason",
+#                 "rule_id",
+#                 "rule_severity",
+#                 "rule_tags",
+#                 "rule_description",
+#                 "rule_name",
+#                 "tool_name",
+#                 "tool_version",
+#                 "most_recent_instance_ref",
+#                 "most_recent_instance_state",
+#                 "most_recent_instance_sha",
+#                 "instances_url",
+#             ]
+#         )
+#         for cs in cs_list:  # loop through each alert in the list
+#             if cs["state"] == "open":
+#                 cs["fixed_at"] = "none"
+#                 cs["dismissed_by"] = "none"
+#                 cs["dismissed_at"] = "none"
+#                 cs["dismissed_reason"] = "none"
+#             writer.writerow(
+#                 [
+#                     cs["repository"]["full_name"],
+#                     cs["repository"]["id"],
+#                     cs["number"],
+#                     cs["created_at"],
+#                     cs["html_url"],
+#                     cs["state"],
+#                     cs["fixed_at"],
+#                     cs["dismissed_by"],
+#                     cs["dismissed_at"],
+#                     cs["dismissed_reason"],
+#                     cs["rule"]["id"],
+#                     cs["rule"]["severity"],
+#                     cs["rule"]["tags"],
+#                     cs["rule"]["description"],
+#                     cs["rule"]["name"],
+#                     cs["tool"]["name"],
+#                     cs["tool"]["version"],
+#                     cs["most_recent_instance"]["ref"],
+#                     cs["most_recent_instance"]["state"],
+#                     cs["most_recent_instance"]["commit_sha"],
+#                     cs["instances_url"],
+#                 ]
+#             )
+#         else:
+#             with open("excluded_repos.csv", "a") as g:
+#                 writer = csv.writer(g)
+#                 writer.writerow([cs])

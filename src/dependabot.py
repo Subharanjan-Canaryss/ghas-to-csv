@@ -74,7 +74,9 @@ def write_repo_dependabot_list(dependabot_list):
                 "cve_id",
             ]
         )
+        print(type(writer))
         for alert in dependabot_list:
+            print(alert);
             if alert["state"] == "open":
                 alert["fixed_at"] = "none"
                 alert["dismissed_by"] = "none"

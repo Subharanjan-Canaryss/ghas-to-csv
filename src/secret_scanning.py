@@ -276,6 +276,8 @@ def get_enterprise_secret_scanning_alerts(api_endpoint, github_pat, enterprise_s
 
 
 def write_enterprise_secrets_list(secrets_list):
+    
+    print("write_enterprise_secrets_list")
     """
     Write the list of enterprise secret scanning alerts to a csv file.
 
@@ -286,62 +288,62 @@ def write_enterprise_secrets_list(secrets_list):
     - CSV file of secret scanning alerts
     """
 
-    if secrets_list == ["not found"]:
-        print("No secret scanning alerts found")
-        return
-    # Write secret scanning alerts to csv file
-    with open("secrets_list.csv", "w") as f:
-        writer = csv.writer(f)
-        writer.writerow(
-            [
-                "number",
-                "created_at",
-                "html_url",
-                "state",
-                "resolution",
-                "resolved_at",
-                "resolved_by_username",
-                "resolved_by_type",
-                "resolved_by_isadmin",
-                "secret_type",
-                "secret_type_display_name",
-                "repo_name",
-                "repo_owner",
-                "repo_owner_type",
-                "repo_owner_isadmin",
-                "repo_url",
-                "repo_isfork",
-                "repo_isprivate",
-            ]
-        )
-        for alert in secrets_list:
-            if alert["state"] == "open":
-                alert["resolution"] = "none"
-                alert["resolved_at"] = "none"
-                alert["resolved_by"] = {
-                    "login": "none",
-                    "type": "none",
-                    "site_admin": "none",
-                }
-                writer.writerow(
-                    [
-                        alert["number"],
-                        alert["created_at"],
-                        alert["html_url"],
-                        alert["state"],
-                        alert["resolution"],
-                        alert["resolved_at"],
-                        alert["resolved_by"]["login"],
-                        alert["resolved_by"]["type"],
-                        alert["resolved_by"]["site_admin"],
-                        alert["secret_type"],
-                        alert["secret_type_display_name"],
-                        alert["repository"]["full_name"],
-                        alert["repository"]["owner"]["login"],
-                        alert["repository"]["owner"]["type"],
-                        alert["repository"]["owner"]["site_admin"],
-                        alert["repository"]["html_url"],
-                        str(alert["repository"]["fork"]),
-                        str(alert["repository"]["private"]),
-                    ]
-                )
+#     if secrets_list == ["not found"]:
+#         print("No secret scanning alerts found")
+#         return
+#     # Write secret scanning alerts to csv file
+#     with open("secrets_list.csv", "w") as f:
+#         writer = csv.writer(f)
+#         writer.writerow(
+#             [
+#                 "number",
+#                 "created_at",
+#                 "html_url",
+#                 "state",
+#                 "resolution",
+#                 "resolved_at",
+#                 "resolved_by_username",
+#                 "resolved_by_type",
+#                 "resolved_by_isadmin",
+#                 "secret_type",
+#                 "secret_type_display_name",
+#                 "repo_name",
+#                 "repo_owner",
+#                 "repo_owner_type",
+#                 "repo_owner_isadmin",
+#                 "repo_url",
+#                 "repo_isfork",
+#                 "repo_isprivate",
+#             ]
+#         )
+#         for alert in secrets_list:
+#             if alert["state"] == "open":
+#                 alert["resolution"] = "none"
+#                 alert["resolved_at"] = "none"
+#                 alert["resolved_by"] = {
+#                     "login": "none",
+#                     "type": "none",
+#                     "site_admin": "none",
+#                 }
+#                 writer.writerow(
+#                     [
+#                         alert["number"],
+#                         alert["created_at"],
+#                         alert["html_url"],
+#                         alert["state"],
+#                         alert["resolution"],
+#                         alert["resolved_at"],
+#                         alert["resolved_by"]["login"],
+#                         alert["resolved_by"]["type"],
+#                         alert["resolved_by"]["site_admin"],
+#                         alert["secret_type"],
+#                         alert["secret_type_display_name"],
+#                         alert["repository"]["full_name"],
+#                         alert["repository"]["owner"]["login"],
+#                         alert["repository"]["owner"]["type"],
+#                         alert["repository"]["owner"]["site_admin"],
+#                         alert["repository"]["html_url"],
+#                         str(alert["repository"]["fork"]),
+#                         str(alert["repository"]["private"]),
+#                     ]
+#                 )
